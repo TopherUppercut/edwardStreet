@@ -3,8 +3,40 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<link rel="stylesheet" type="text/css" href="style.css" />
-<title>Edward Street</title>
+  <link rel="stylesheet" type="text/css" href="style.css" />
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" ></script>
+  <script src="login.js"></script>
+  <title>Edward Street</title>
+  <script>
+
+    document.addEventListener( "DOMContentLoaded", function( event ) {
+      
+      var cookie = window.cookie;
+
+      if ( cookie.substring( 0, 2 ).toLowerCase() !== "ad" ) {
+        window.location = "http://localhost/~dseif/edwardStreet/site/login.html";
+      }
+      
+      document.getElementById( "saveBtn" ).addEventListener( "click", function( event ) { 
+
+        $.ajax({
+          cache: false,
+          url: "http://localhost:8080/createuser",
+          data: {
+            user: document.getElementById( "usrName" ).value,
+            pass: document.getElementById( "tempPwd" ).value,
+            hash: cookie,
+            email: document.getElementById( "emailAddrs" ).value,
+            role: document.getElementById( "roleBox" ).value
+          },
+          success: function( response, code, xhr ) {
+          
+            console.log( response );
+          }
+        });
+      }, false );
+    }, false );
+  </script>
 </head>
 
 <body>
@@ -31,17 +63,9 @@
 					<select name="RoleBox" id="roleBox">
   						<option value="buyer">Buyer</option>
   						<option value="receiver">Receiver</option>
-  						<option value="supplier">Supplier</option>
-  						<option value="admin">Admin</option>
+  						<option value="admin">Adminstrator</option>
 					</select><br/>
-				Supplier
-					<select name="SupplierBox" id="suppBox">
-  						<option value="1">Supplier1</option>
-  						<option value="2">Supplier2</option>
-  						<option value="3">Supplier3</option>
-  						<option value="4">Supplier4</option>
-					</select><br/>
-				<input value="Save" type="submit" name="SaveButton" id="savBtn"/>
+				<input value="Save" type="submit" name="SaveButton" id="saveBtn"/>
 				<input value="Cancel" type="reset" name="CancelButton" id="cancelBtn"/>				
 				<br/>
 				
