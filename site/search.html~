@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <link rel="stylesheet" type="text/css" href="style.css" />
-<title>Edward Street - Shopping Cart</title>
+<title>Edward Street - Search</title>
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
@@ -67,7 +67,7 @@
     <li id="poMenu"><a href="#"> Purchase Order > </a>
       <ul>
         <li><a href="createpo.html">Create Purchase Order</a></li>
-        <li><a href="editpo.html">Edit Purchase Order</a></li>
+        <li><a href="modifypo.html">Edit Purchase Order</a></li>
         <li><a href="viewpo.html">View Purchase Order</a></li>
         <li><a href="receivepo.html">Receive Purchase Order</a></li>
         <li><a href="returnpo.html">Return Purchase Order</a></li>
@@ -75,8 +75,8 @@
       <div class="clear"></div>
     </li>
     
-    <li id="searchMenu"><a href="search.html">Search</a></li>
-    <li id="shoppingCartMenu"><a href="#">Shopping Cart</a></li>
+    <li id="searchMenu"><a href="#">Search</a></li>
+    <li id="shoppingCartMenu"><a href="shoppingcart.html">Shopping Cart</a></li>
     <li id="viewLogMenu"><a href="viewlog.html">View Log</a></li>
     
     </ul>
@@ -84,38 +84,34 @@
   </div>
 
 <div id="wrapper">
-	<h2 class="bigfont">Shopping Cart</h2><br />
+	<h2 class="bigfont">Search</h2><br />
 		
 	<div id="wrapper-bgtop">
-		<h3>Manage Shopping Cart</h3><br/>
+		<h3>Search Database</h3><br/>
 			
 			<div id="page">
-					
-				<p>Search : <input type="text" value="" name="SearchText" id="srchText"/>
-				for:	<select name="SearchDetails" id="srchDetail">
-  						<option value="1">SupplierID</option>
-  						<option value="2">PLU</option>
-  						<option value="3">Item</option>
-					</select><br/>
-
-				<input name="SearchDataBase" id="searchDB" value="Search" type="submit"/>
+				<p>Search: <input type="text" value="" name="SearchText" id="srchText"/>
+				 
+				for <select name="searchDetails" id="srchDetail">
+  					<option value="suppID">Supplier ID</option>
+  					<option value="suppName">Supplier Name</option>
+  					<option value="legName">Legal Name</option>
+  					<option value="contactNum">Contact Number</option>
+					<option value="addr">Address</option>
+				    </select>
+				<br/>
+				<input value="search" type="submit" name="SubmitButton" id="submitBtn"/>
+				<input value="view all" type="submit" name="SubmitAll" id="submitBtnAll"/>
 				</p><br/>
 
 				<div id="content">
-				
-				<table border="1">
+					<table border="1" id="resultTbl">
   					<tr>
-                            <th>PLU</th>
-                            <th>Distributor Code</th>
-                            <th>Item Name</th>
-                            <th>Receipt Name</th>
-                            <th>Category</th>
-                            <th>Supplier</th>
-                            <th>Price</th>
-                            <th>Unit</th>
-                            <th>Item Type</th>
-                            <th>QTY</th>
-                            <th>Selected</th>
+    						<th>SupplierID</th>
+    						<th>Supplier Name</th>
+    						<th>Legal Name</th>
+    						<th>Contact Number</th>
+    						<th>Address</th>
   					</tr>
   					<tr>
     						<td></td>
@@ -123,17 +119,8 @@
     						<td></td>
     						<td></td>
     						<td></td>
-    						<td></td>
-    						<td></td>
-    						<td></td>
-						<td></td>
-						<td><input id="qty" name="Quantity" value="" type="text"/></td>
-						<td><input id="selectedItem" name="Selected" value="" type="checkbox"/></td>
   					</tr>
-					</table><br/>
-				<input id="conf" name="Confirm" value="Confirm" type="submit"/>
-				<input id="cancel" name="Cancel" value="Cancel" type="reset"/>
-				
+					</table>	
 				</div>
 			</div>
 	</div>
@@ -146,7 +133,6 @@
 <br />
 </div>
 </div>
-
 
 </body>
 

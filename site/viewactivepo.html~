@@ -21,7 +21,7 @@
 	);
 
     });
-	</script>
+</script>
 </head>
 
 <body>
@@ -97,40 +97,52 @@
 	</div>
 
 <div id="wrapper">
-	<h2 class="bigfont">Maintain User Profile</h2><br />
+	<h2 class="bigfont">Purchase Orders</h2><br />
 		
 	<div id="wrapper-bgtop">
-		<h3>Delete User</h3><br/>
+		<h3>View Active Purchase Orders</h3><br/>
 			
 			<div id="page">
-				
-				Search <input value="" type="text" name="SearchText" id="srchText"/>
-				<input value="Search" type="submit" name="SubmitButton" id="submitBtn"/><br/>
 
 				<div id="content">
-
-
-					<table border="1" id="userTable">
+					<table border="1" id="actvPoTable">
   					<tr>
-    						<th>Login Name</th>
-    						<th>Role</th>
-    						<th>Email Address</th>
-    						<th>Employee ID</th>
-    						<th>Selected</th>
+    						<th>OrderNumber</th>
+    						<th>Status</th>
+    						<th>Create Date</th>
+    						<th>Submit Date</th>
+    						<th>Delivery Date</th>
+    						<th>Receive Date</th>
+    						<th>Reference Number</th>
+    						<th>Author</th>
+    						<th>Supplier</th>
+    						<th>Item</th>
+    						<th>QTY Ordered</th>
+    						<th>price</th>
+    						<th>price/unit comment</th>
+    						<th>Subtotal</th>
+    						<th>Ordered Grand Total</th>
+						<th>Received Grand Total</th>
   					</tr>
   					<tr>
     						<td></td>
     						<td></td>
     						<td></td>
     						<td></td>
-    						<td><input value="selectedItem" type="checkbox" name="selectItem" id="selItem"/></td>
+    						<td></td>
+    						<td></td>
+    						<td></td>
+    						<td></td>
+    						<td></td>
+    						<td></td>
+    						<td></td>
+    						<td></td>
+    						<td></td>
+    						<td></td>
+						<td></td>
+    						<td></td>
   					</tr>
-					</table>
-
-				<input value="Delete" type="submit" name="DeleteButton" id="delBtn"/>
-				<input value="Cancel" type="reset" name="CancelButton" id="cancelBtn"/>
-				<br/>
-	
+					</table>	
 				</div>
 			</div>
 	</div>
@@ -143,7 +155,6 @@
 <br />
 </div>
 </div>
-
 
 </body>
 

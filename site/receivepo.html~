@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <link rel="stylesheet" type="text/css" href="style.css" />
-<title>Edward Street - Shopping Cart</title>
+<title>Edward Street - Receive Purchase Order</title>
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
@@ -67,16 +67,16 @@
     <li id="poMenu"><a href="#"> Purchase Order > </a>
       <ul>
         <li><a href="createpo.html">Create Purchase Order</a></li>
-        <li><a href="editpo.html">Edit Purchase Order</a></li>
+        <li><a href="modifypo.html">Edit Purchase Order</a></li>
         <li><a href="viewpo.html">View Purchase Order</a></li>
-        <li><a href="receivepo.html">Receive Purchase Order</a></li>
+        <li><a href="#">Receive Purchase Order</a></li>
         <li><a href="returnpo.html">Return Purchase Order</a></li>
       </ul>			
       <div class="clear"></div>
     </li>
     
     <li id="searchMenu"><a href="search.html">Search</a></li>
-    <li id="shoppingCartMenu"><a href="#">Shopping Cart</a></li>
+    <li id="shoppingCartMenu"><a href="shoppingcart.html">Shopping Cart</a></li>
     <li id="viewLogMenu"><a href="viewlog.html">View Log</a></li>
     
     </ul>
@@ -84,40 +84,40 @@
   </div>
 
 <div id="wrapper">
-	<h2 class="bigfont">Shopping Cart</h2><br />
+	<h2 class="bigfont">Purchase Orders</h2><br />
 		
 	<div id="wrapper-bgtop">
-		<h3>Manage Shopping Cart</h3><br/>
+		<h3>Receive Purchase Orders</h3><br/>
 			
 			<div id="page">
-					
-				<p>Search : <input type="text" value="" name="SearchText" id="srchText"/>
-				for:	<select name="SearchDetails" id="srchDetail">
-  						<option value="1">SupplierID</option>
-  						<option value="2">PLU</option>
-  						<option value="3">Item</option>
-					</select><br/>
-
-				<input name="SearchDataBase" id="searchDB" value="Search" type="submit"/>
-				</p><br/>
-
-				<div id="content">
 				
-				<table border="1">
+
+					<table border="1" id="recPOTable">
   					<tr>
-                            <th>PLU</th>
-                            <th>Distributor Code</th>
-                            <th>Item Name</th>
-                            <th>Receipt Name</th>
-                            <th>Category</th>
-                            <th>Supplier</th>
-                            <th>Price</th>
-                            <th>Unit</th>
-                            <th>Item Type</th>
-                            <th>QTY</th>
-                            <th>Selected</th>
+    						<th>OrderNumber</th>
+    						<th>Status</th>
+    						<th>Create Date</th>
+    						<th>Submit Date</th>
+    						<th>Delivery Date</th>
+    						<th>Receive Date</th>
+    						<th>Reference Number</th>
+    						<th>Author</th>
+    						<th>Supplier</th>
+    						<th>Item</th>
+    						<th>QTY Ordered</th>
+    						<th>price</th>
+    						<th>price/unit comment</th>
+    						<th>Subtotal</th>
+    						<th>Grand Total</th>
+    						<th>QTY received</th>
+    						<th>Fully received</th>
   					</tr>
   					<tr>
+    						<td></td>
+    						<td></td>
+    						<td></td>
+    						<td></td>
+    						<td></td>
     						<td></td>
     						<td></td>
     						<td></td>
@@ -127,13 +127,22 @@
     						<td></td>
     						<td></td>
 						<td></td>
-						<td><input id="qty" name="Quantity" value="" type="text"/></td>
-						<td><input id="selectedItem" name="Selected" value="" type="checkbox"/></td>
+						<td></td>
+    						<td><input value="" type="text" name="QTYReceived" id="qtyRec"/></td>
+    						<td><input value="fullyrec" type="checkbox" name="FullyReceived" id="fullyRec"/></td>
   					</tr>
-					</table><br/>
-				<input id="conf" name="Confirm" value="Confirm" type="submit"/>
-				<input id="cancel" name="Cancel" value="Cancel" type="reset"/>
-				
+					</table>
+
+				<div id="content">
+
+				<p>Comment: <textarea rows="4" cols="20" name="CommentText" id="comntText"></textarea>
+				Conflict
+				<input type="checkbox" value="Conflict" name="ConflictBox" id="cnflctBox"/>
+				<br/>
+				<input value="confirm" type="submit" name="SubmitButton" id="submitBtn"/>
+				<input value="cancel" type="reset" name="ResetButton" id="resetBtn"/>
+				</p><br/>
+	
 				</div>
 			</div>
 	</div>

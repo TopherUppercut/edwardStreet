@@ -4,42 +4,66 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <link rel="stylesheet" type="text/css" href="style.css" />
-  <title>Edward Street - Create Item</title>
+  <title>Edward Street - Edit Item</title>
   <script type="text/javascript" src="js/jquery.js"></script>
+  <!-- <script type="text/javascript" src="login.js"></script> -->
   <script type="text/javascript">
-    // Add a listenter for the submit button
     document.addEventListener( "DOMContentLoaded", function( event ) {
 
-      var button = document.getElementById( "saveBtn" );
-      button.addEventListener( "click", function( event ) {
+    $.ajax({
+      cache: false,
+      url: "http://localhost:8080/viewsupplier",
+      data: {
+        hash: getCookie( "EDST_H" )
+      },
+      success: function( response, code, xhr ) {
 
+        var table = document.getElementById( "suppTable" );
+
+        response = JSON.parse( response );
+
+        var addRow = function( count ) {
+          var row = table.insertRow( count + 1 ),
+          data = response[ count ],
+          count = 0;
+
+          for( var item in data ) {
+            row.insertCell( count ).innerHTML = data[ item ];
+          }
+        }
+
+        for( var i = 0, len = response.length; i < len; i ++ ) {
+          addRow( i );
+        }
+      }
+    });
+    
+    // Edit the selected supplier
+    var button = document.getElementById( "savBtn" );
+    button.addEventListener( "click", function( event ) {
       $.ajax({
         cache: false,
         url: "http://localhost:8080/addsupplier",
         data: {
+          usrName: document.getElementById( "usrName" ).value,
+          roleBox: document.getElementById( "roleBox" ).value,
           suppName: document.getElementById( "suppName" ).value,
           leglName: document.getElementById( "leglName" ).value,
           addrs: document.getElementById( "addrs" ).value,
-          contctNumber: document.getElementById( "contctNumber" ).value,
+          contact: document.getElementById( "contact" ).value,
           leadTime: document.getElementById( "leadTime" ).value,
+          datesofdelivery: document.getElementById( "datesofdelivery" ).value,
           
           // Is this valid? getElementByName
-          DeliveryDates: document.getElementByName( "DeliveryDates" ).value,
-          SupplierComments: document.getElementByName( "SupplierComments" ).value,
-          SpecialComments: document.getElementByName( "SpecialComments" ).value,
-
-          loginID: document.getElementById( "loginID" ).value,
-          pwd: document.getElementById( "pwd" ).value,
-          emailAddr: document.getElementById( "emailAddr" ).value
+          suppComment: document.getElementByName( "suppComment" ).value,
+          otherComments: document.getElementByName( "otherComment" ).value,
         },
         success: function( response, code, xhr ) {
-
           // The supplier has been added successfully
         }
       });
-     }, false );
-    }, false );
-    
+    }, false );    
+
     $(document).ready(function () {
       $('#nav li').hover(
         function () {
@@ -51,7 +75,7 @@
           $('ul', this).hide();
         }
       );
-    });
+    });});
 	</script>
 </head>
 
@@ -88,8 +112,8 @@
     
     <li id="supplierMenu"><a href="#"> Supplier > </a>
       <ul>
-        <li><a href="#">Create Supplier</a></li>
-        <li><a href="editsupplier.html">Edit Supplier</a></li>
+        <li><a href="createsupp.html">Create Supplier</a></li>
+        <li><a href="#">Edit Supplier</a></li>
 
       </ul>
       <div class="clear"></div>
@@ -118,11 +142,68 @@
     <h2 class="bigfont">Supplier</h2><br />
       
     <div id="wrapper-bgtop">
-      <h3>Create Supplier</h3><br/>
+      <h3>Edit Supplier</h3><br/>
         
         <div id="page">
+          
+          <table>
+          <tr>
+            <td>Search: <input value="" type="text" name="SearchText" id="searchText"/></td>
+            <td>By:
+              <select name="searchDetails" id="searchDetails">
+                <option value="supplierName" selected="selected">Supplier Name</option>
+                <option value="legalName">Legal Name</option>
+                <option value="supplierContact">Supplier Contact</option>
+                <option value="supplierAddress">Supplier Address</option>
+                <option value="contactNumber">Contact Number</option>
+                <option value="leadTime">Lead Time</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td><input value="Search" type="submit" name="SubmitButton" id="submitBtn"/>OR
+            <input value="View All" type="submit" name="ViewAllButton" id="viewAllBtn"/></td>
+          </tr>
+          </table>
+          
+          <br/><hr/><br/>
+          Results:
+          <br/><br/>
+          <table border="1" id="supplierTable">
+            <tr>
+              <th width="9%">Login Name</th>
+              <th width="9%">Supplier Name</th>
+              <th width="9%">Legal Name</th>
+              <th width="9%">Email Address</th>
+              <th width="9%">Supplier Address</th>
+              <th width="9%">Contact Number</th>
+              <th width="9%">Lead Time</th>
 
-				  <div id="content">
+              <th width="9%">Delivery Dates</th>
+              <th width="9%">Supplier Comments</th>
+              <th width="9%">Misc. Comments</th>
+
+              <th width="9%">Edit</th>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td><textarea id="deliveryDates" name="DeliveryDates" cols="6" rows="2" readonly="readonly"></textarea></td>
+              <td><textarea id="supplierComments" name="SupplierComments" cols="6" rows="2" readonly="readonly"></textarea></td>
+              <td><textarea id="miscComments" name="MiscComments" cols="6" rows="2" readonly="readonly"></textarea></td>
+              <td><input value="selectedItem" type="checkbox" name="SelectSupplier" id="selectSupplier"/></td>
+            </tr>
+          </table>
+
+          <br/><br/><hr/><br/><br/>
+          
+          <div id="content">
+            
             <form id="createSupplierForm">
             <table id="createSupplierTable">
               <tr>
@@ -171,7 +252,8 @@
               </tr>
               <tr>
                 <td><input value="Clear" type="reset" name="CancelButton" id="cancelBtn"/></td>
-                <td><input value="Save" type="submit" name="SaveButton" id="saveBtn"/></td>
+                <td><input value="Save" type="submit" name="SaveButton" id="saveBtn"/>OR
+                <input value="Delete" type="submit" name="DeleteButton" id="deleteBtn"/></td>
               </tr>
             </table>
             </form>

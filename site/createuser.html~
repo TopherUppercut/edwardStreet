@@ -4,45 +4,51 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <link rel="stylesheet" type="text/css" href="style.css" />
-  <title>Edward Street - Change Password</title>
-  <script src="login.js" ></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
-  <script>
-    function changePass() {
-      var pass = document.getElementById( "newPassword" ).value,
-          message = document.getElementById( "message" );
+  <title>Edward Street - Create User</title>
+  <script type="text/javascript" src="js/jquery.js"></script>
+  <script type="text/javascript">
+    document.addEventListener( "DOMContentLoaded", function( event ) {
 
-      if ( pass !== document.getElementById( "confirmNewPassword" ).value ) {
-        message.innerHTML = "Passwords do not match";
-        return; 
-      }
+    var cookie = window.cookie;
+    if ( cookie.substring( 0, 2 ).toLowerCase() !== "ad" ) {
+
+      window.location = "http://localhost/~dseif/edwardStreet/site/login.html";
+    }
+
+    document.getElementById( "saveBtn" ).addEventListener( "click", function( event ) { 
 
       $.ajax({
         cache: false,
-        url: "http://localhost:8080/changePassword",
-        data: { hash: getCookie( "EDST_H" ), pass: pass },
+        url: "http://localhost:8080/createuser",
+        data: {
+          user: document.getElementById( "userName" ).value,
+          //pass: document.getElementById( "tempPwd" ).value,
+          hash: cookie,
+          email: document.getElementById( "emailAddress" ).value,
+          role: document.getElementById( "useroleBox" ).value
+        },
         success: function( response, code, xhr ) {
-          message.innerHTML = response;
+
+          console.log( response );
         }
-      }); 
-    }
+      });
+    }, false );
+  }, false );
 
     $(document).ready(function () {
-          $('#nav li').hover(
-		    function () {
-	        	//show its submenu
-	        	$('ul', this).show();
-		    },
-		    function () {
-	        	//hide its submenu
-	        	$('ul', this).hide();
-		    }
-	    );
+      $('#nav li').hover(
+        function () {
+          //show its submenu
+          $('ul', this).show();
+        },
+        function () {
+          //hide its submenu
+          $('ul', this).hide();
+        }
+      );
     });
-   </script>
+	</script>
 </head>
-
-
 
 <body>
   <div id="header">
@@ -68,9 +74,9 @@
 
     <li id="userMenu"><a href="#"> User > </a>
       <ul>
-        <li><a href="createuser.html">Create User</a></li>
+        <li><a href="#">Create User</a></li>
         <li><a href="edituser.html">Edit User</a></li>
-        <li><a href="#">Change Password</a></li>
+        <li><a href="changepassword.html">Change Password</a></li>
       </ul>
       <div class="clear"></div>
     </li>
@@ -87,7 +93,7 @@
     <li id="poMenu"><a href="#"> Purchase Order > </a>
       <ul>
         <li><a href="createpo.html">Create Purchase Order</a></li>
-        <li><a href="editpo.html">Edit Purchase Order</a></li>
+        <li><a href="modifypo.html">Edit Purchase Order</a></li>
         <li><a href="viewpo.html">View Purchase Order</a></li>
         <li><a href="receivepo.html">Receive Purchase Order</a></li>
         <li><a href="returnpo.html">Return Purchase Order</a></li>
@@ -107,24 +113,30 @@
     <h2 class="bigfont">User</h2><br />
       
     <div id="wrapper-bgtop">
-      <h3>Change Password</h3><br/>
+      <h3>Create User</h3><br/>
         
         <div id="page">
 
 				  <div id="content">
-            <form id="changePasswordForm">
-            <table id="changePasswordTable">
+            <form id="createUserForm">
+            <table id="createUserTable">
               <tr>
-                <td>Current Password:</td>
-                <td><input type="text" value="" name="CurrentPassword" id="currentPassword"/></td>
+                <td>User Name:</td>
+                <td><input type="text" value="" name="UserName" id="userName"/></td>
               </tr>
               <tr>
-                <td>New Password:</td>
-                <td><input type="text" value="" name="NewPassword" id="newPassword"/></td>
+                <td>User Email:</td>
+                <td><input type="text" value="" name="EmailAddress" id="emailAddress"/></td>
               </tr>
               <tr>
-                <td>Confirm New Password:</td>
-                <td><input type="text" value="" name="ConfirmNewPassword" id="confirmNewPassword"/></td>
+                <td>User Role:</td>
+                <td><select name="UserRole" id="userRoleBox">
+                  <option value="admin">Admin</option>
+                  <option value="buyer">Buyer</option>
+                  <option value="receiver">Receiver</option>
+                  <option value="supplier">Supplier</option>
+                  </select>
+                </td>
               </tr>
               <tr>
                 <td><input value="Clear" type="reset" id="clearBtn"/></td>
@@ -132,7 +144,6 @@
               </tr>
             </table>
             </form>
-            <div id="message" style="color:red"></div> 
           </div> <!-- Content -->
         </div><!-- Page -->
     </div><!-- Wrapper-BgTop -->
