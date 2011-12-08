@@ -613,6 +613,16 @@ function createSupplier( response ) {
       console.log( "Created new supplier: " + vals.user_id );
       response.write( JSON.stringify( rows ) );
       
+      var weekday = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+      
+      for (var i = 0; i < 7; i++) {
+      
+      helper.query( "INSERT INTO DAYS_OF_DELIVERY SUPPLIER_ID, DAY) " +
+                    "VALUES ( '" + rows[ 0 ][ "id" ] + "', '" + day[i] +"' )",
+                    function( error, rows, cols ) {
+                      response.write( JSON.stringify( rows ) );
+      });
+                    }
     }
 
     response.end();

@@ -45,6 +45,7 @@
 
       var data = JSON.parse( response );
       if ( data[ 0 ][ "COUNT(*)" ] == 0 ) {
+        var daysofdelivery[0] = document.getElementById( "delSunday" ).value;
       $.ajax({
         cache: false,
         url: "http://96.126.109.151:8080/createsupplier",
@@ -59,6 +60,7 @@
         success: function( response, code, xhr ) {
 
           console.log( response );
+
         }
         });
       } else {
@@ -174,13 +176,13 @@
 
         <label for="deliveryDate">Delivery Dates</label> <br/>
         <div id="edst-checkboxes">
-          <label for="delSunday">Sunday:</label>  <input type="checkbox" name="Sunday" value="Sunday"  /><br/>
-          <label for="delMonday">Monday:</label>  <input type="checkbox" name="Monday" value="Monday"  /><br/>
-          <label for="delTuesday">Tuesday:</label> <input type="checkbox" name="Tuesday" value="Tuesday"  /><br/>
-          <label for="delWednesday">Wednesday:</label> <input type="checkbox" name="Wednesday" value="Wednesday"  /><br/>
-          <label for="delThursday">Thursday:</label>  <input type="checkbox" name="Thursday" value="Thursday"  /><br/>
-          <label for="delFriday">Friday:</label> <input type="checkbox" name="Friday" value="Friday"  /><br/>
-          <label for="delSaturday">Saturday:</label>  <input type="checkbox" name="Saturday" value="Saturday"  /><br/>
+          <label for="delSunday">Sunday:</label>  <input type="checkbox" name="Sunday" value="Sunday" id="delSunday"/><br/>
+          <label for="delMonday">Monday:</label>  <input type="checkbox" name="Monday" value="Monday" id="delMonday"/><br/>
+          <label for="delTuesday">Tuesday:</label> <input type="checkbox" name="Tuesday" value="Tuesday" id="delTuesday"/><br/>
+          <label for="delWednesday">Wednesday:</label> <input type="checkbox" name="Wednesday" value="Wednesday" id="delWednesday"/><br/>
+          <label for="delThursday">Thursday:</label>  <input type="checkbox" name="Thursday" value="Thursday" id="delThursday"/><br/>
+          <label for="delFriday">Friday:</label> <input type="checkbox" name="Friday" value="Friday" id="delFriday"/><br/>
+          <label for="delSaturday">Saturday:</label>  <input type="checkbox" name="Saturday" value="Saturday" id="delSaturday"/><br/>
         </div>
 				<div id="deliveryDateValid"></div>
 
