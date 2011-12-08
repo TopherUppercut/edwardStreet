@@ -290,28 +290,31 @@
         success: function( response, code, xhr ) {
           console.log( response );
          poid = JSON.parse(response)[ "id" ];
+         
+         var obj = window.edstPOobj;
+         for (var item in obj[$( ".ui-state-active" ).attr( "id" ).split( "-" )[ 1 ]][ "obj" ]) {
+           var currentObj = obj[$( ".ui-state-active" ).attr( "id" ).split( "-" )[ 1 ]][ "obj" ][ item ];
+           
+           $.ajax({
+              cache: false,
+              url: "http://96.126.109.151:8080/createorderline",
+              data: {
+                po_id: poid,
+                po_line: currentObj[ "Line" ],
+                item_id: currentObj[ "item_id" ],
+                qty_ordered:  currentObj [ "qty" ],
+                comment:  currentObj [ "comment" ],
+                price_id: currentObj [ "price" ],
+                hash: cookie
+              },
+              success: function( response, code, xhr ) {
+                console.log( response );
+              }
+            });
+          }
+
          cb && cb(poid);
           
-          /*
-          $.ajax({
-            cache: false,
-            url: "http://96.126.109.151:8080/createorderline",
-            data: {
-              
-              item_id: document.getElementById( "refNumber" ).value,
-              qty_ordered: document.getElementById( "comments" ).value,
-              comment: document.getElementById( "comments" ).value,
-              curUserID: "",
-              price_id: "",
-              po_id: document.getElementById( "deliveryDate" ).value,
-              po_line: document.getElementById( "deliveryTime" ).value,
-              hash: cookie
-            },
-            success: function( response, code, xhr ) {
-              console.log( response );
-            }
-          });
-          */
          }
       });
       return poid;
