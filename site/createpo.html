@@ -300,7 +300,7 @@
               url: "http://96.126.109.151:8080/createorderline",
               data: {
                 po_id: poid,
-                po_line: currentObj[ "Line" ],
+                po_line_id: currentObj[ "Line" ],
                 item_id: currentObj[ "item_id" ],
                 qty_ordered:  currentObj [ "qty" ],
                 comment:  currentObj [ "comment" ],
@@ -309,6 +309,7 @@
               },
               success: function( response, code, xhr ) {
                 console.log( response );
+                
               }
             });
           }

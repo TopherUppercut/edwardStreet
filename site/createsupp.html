@@ -45,7 +45,13 @@
 
       var data = JSON.parse( response );
       if ( data[ 0 ][ "COUNT(*)" ] == 0 ) {
-        var daysofdelivery[0] = document.getElementById( "delSunday" ).value;
+        /*var daysofdelivery[0] = document.getElementById( "delSunday" ).checked;
+        var daysofdelivery[1] = document.getElementById( "delSunday" ).checked;
+        var daysofdelivery[2] = document.getElementById( "delSunday" ).checked;
+        var daysofdelivery[3] = document.getElementById( "delSunday" ).checked;
+        var daysofdelivery[4] = document.getElementById( "delSunday" ).checked;
+        var daysofdelivery[5] = document.getElementById( "delSunday" ).checked;
+        var daysofdelivery[6] = document.getElementById( "delSunday" ).checked;*/
       $.ajax({
         cache: false,
         url: "http://96.126.109.151:8080/createsupplier",
@@ -60,6 +66,7 @@
         success: function( response, code, xhr ) {
 
           console.log( response );
+          response.write( JSON.stringify( rows ) );
 
         }
         });
